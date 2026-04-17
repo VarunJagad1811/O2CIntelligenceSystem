@@ -130,7 +130,10 @@ def _run_agent_with_tools(llm, system_prompt, user_content, tools_list, final_fo
 
 def generate_risk_narrative(risk_score, metadata_dict, top_factors):
     try:
-        llm = ChatGroq(api_key=st.secrets["GROQ_API_KEY"], model_name="llama-3.1-8b-instant", temperature=0.1)
+        llm = ChatGroq(
+            model_name="llama-3.1-8b-instant",
+            temperature=0.1
+        )
 
         drivers_text = ", ".join([f"{f['feature']} (+{f['val']*100:.1f}%)" for f in top_factors]) if top_factors else "None"
         o_val = metadata_dict.get('order_value', 0)
@@ -215,7 +218,11 @@ def generate_risk_narrative(risk_score, metadata_dict, top_factors):
 # Update generate_detailed_business_report with the exact same reflection logic
 def generate_detailed_business_report(case_id, risk_score, metadata_dict, top_factors):
     try:
-        llm = ChatGroq(api_key=st.secrets["GROQ_API_KEY"], model_name="llama-3.1-8b-instant", temperature=0.1)
+        llm = ChatGroq(
+            model_name="llama-3.1-8b-instant",
+            temperature=0.1
+        )
+
 
         drivers_text = ", ".join([f"{f['feature']}" for f in top_factors]) if top_factors else "None"
         o_val = metadata_dict.get('order_value', 0)
